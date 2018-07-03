@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd"
+	default-lazy-init="true">
+
+	<description>Shiro Configuration</description>
+
+ 
+	<!-- Shiro's main business-tier object for web-enabled applications -->
+	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+		<property name="realm" ref="shiroDbRealm" />
+		<property name="cacheManager" ref="shiroCacheManager" />
+		<!-- <property name="sessionManager" ref="sessionManager" /> -->
+	</bean>
+
+	<!-- 用来做登录用户验证 -->
+	<bean id="shiroDbRealm" class="com.qppi.crud.auth.ShiroDbRealm" />
+	<!-- Shiro Filter -->
+	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+		<property name="securityManager" ref="securityManager" />
+		<property name="loginUrl" value="/login" />
+		<property name="successUrl" value="/login" />
+		<property name="filters">
+			<map>
+				<entry key="authc" value-ref="authc" />
+				<!-- <entry key="kickout" value-ref="kickoutSessionControlFilter"/> -->
+			</map>
+		</property>
+		<property name="filterChainDefinitions">
+			<value>
+				/workLogin= authc
+				/serviceLogin= authc
+				/login = authc
+
+				/logout = logout
+				/images/** = anon
+				/scripts/** = anon
+			
+				/MemberInfoController/addMemberInfo	= anon
+				/SysUserController/addSysUserService	= anon
+				/SysUserController/addSysUserWork	= anon
+					
+		    	/** = user
+		 	</value>
+		</property>
+	</bean>
+
+ 
+
+	<!-- 用户授权信息Cache -->
+	<bean id="shiroCacheManager" class="org.apache.shiro.cache.MemoryConstrainedCacheManager" />
+	
+	<!-- 保证实现了Shiro内部lifecycle函数的bean执行 -->
+	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
+	
+</beans>

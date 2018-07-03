@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qppi.crud.dao.WorkingHoursMapper">
+  <resultMap id="BaseResultMap" type="com.qppi.crud.bean.WorkingHours">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="update_by" jdbcType="VARCHAR" property="updateBy" />
+    <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
+    <result column="del_flag" jdbcType="VARCHAR" property="delFlag" />
+    <result column="order_id" jdbcType="VARCHAR" property="orderId" />
+    <result column="pay_time" jdbcType="TIMESTAMP" property="payTime" />
+    <result column="time_out" jdbcType="TIMESTAMP" property="timeOut" />
+    <result column="total" jdbcType="DOUBLE" property="total" />
+    <result column="remark_pay" jdbcType="VARCHAR" property="remarkPay" />
+    <result column="remarks" jdbcType="VARCHAR" property="remarks" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, create_by, create_date, update_by, update_date, del_flag, order_id, pay_time, 
+    time_out, total, remark_pay, remarks
+  </sql>
+  <select id="selectByExample" parameterType="com.qppi.crud.bean.WorkingHoursExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from working_hours
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from working_hours
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from working_hours
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.qppi.crud.bean.WorkingHoursExample">
+    delete from working_hours
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.qppi.crud.bean.WorkingHours">
+    insert into working_hours (id, create_by, create_date, 
+      update_by, update_date, del_flag, 
+      order_id, pay_time, time_out, 
+      total, remark_pay, remarks
+      )
+    values (#{id,jdbcType=VARCHAR}, #{createBy,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{updateBy,jdbcType=VARCHAR}, #{updateDate,jdbcType=TIMESTAMP}, #{delFlag,jdbcType=VARCHAR}, 
+      #{orderId,jdbcType=VARCHAR}, #{payTime,jdbcType=TIMESTAMP}, #{timeOut,jdbcType=TIMESTAMP}, 
+      #{total,jdbcType=DOUBLE}, #{remarkPay,jdbcType=VARCHAR}, #{remarks,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.qppi.crud.bean.WorkingHours">
+    insert into working_hours
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="createBy != null">
+        create_by,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="updateBy != null">
+        update_by,
+      </if>
+      <if test="updateDate != null">
+        update_date,
+      </if>
+      <if test="delFlag != null">
+        del_flag,
+      </if>
+      <if test="orderId != null">
+        order_id,
+      </if>
+      <if test="payTime != null">
+        pay_time,
+      </if>
+      <if test="timeOut != null">
+        time_out,
+      </if>
+      <if test="total != null">
+        total,
+      </if>
+      <if test="remarkPay != null">
+        remark_pay,
+      </if>
+      <if test="remarks != null">
+        remarks,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null">
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="delFlag != null">
+        #{delFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="orderId != null">
+        #{orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="payTime != null">
+        #{payTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="timeOut != null">
+        #{timeOut,jdbcType=TIMESTAMP},
+      </if>
+      <if test="total != null">
+        #{total,jdbcType=DOUBLE},
+      </if>
+      <if test="remarkPay != null">
+        #{remarkPay,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null">
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.qppi.crud.bean.WorkingHoursExample" resultType="java.lang.Long">
+    select count(*) from working_hours
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update working_hours
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createBy != null">
+        create_by = #{record.createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createDate != null">
+        create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateBy != null">
+        update_by = #{record.updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateDate != null">
+        update_date = #{record.updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.delFlag != null">
+        del_flag = #{record.delFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderId != null">
+        order_id = #{record.orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.payTime != null">
+        pay_time = #{record.payTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.timeOut != null">
+        time_out = #{record.timeOut,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.total != null">
+        total = #{record.total,jdbcType=DOUBLE},
+      </if>
+      <if test="record.remarkPay != null">
+        remark_pay = #{record.remarkPay,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remarks != null">
+        remarks = #{record.remarks,jdbcType=VARCHAR},
+      </if>
+      	id=id
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update working_hours
+    set id = #{record.id,jdbcType=VARCHAR},
+      create_by = #{record.createBy,jdbcType=VARCHAR},
+      create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      update_by = #{record.updateBy,jdbcType=VARCHAR},
+      update_date = #{record.updateDate,jdbcType=TIMESTAMP},
+      del_flag = #{record.delFlag,jdbcType=VARCHAR},
+      order_id = #{record.orderId,jdbcType=VARCHAR},
+      pay_time = #{record.payTime,jdbcType=TIMESTAMP},
+      time_out = #{record.timeOut,jdbcType=TIMESTAMP},
+      total = #{record.total,jdbcType=DOUBLE},
+      remark_pay = #{record.remarkPay,jdbcType=VARCHAR},
+      remarks = #{record.remarks,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qppi.crud.bean.WorkingHours">
+    update working_hours
+    <set>
+      <if test="createBy != null">
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null">
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null">
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="delFlag != null">
+        del_flag = #{delFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="orderId != null">
+        order_id = #{orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="payTime != null">
+        pay_time = #{payTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="timeOut != null">
+        time_out = #{timeOut,jdbcType=TIMESTAMP},
+      </if>
+      <if test="total != null">
+        total = #{total,jdbcType=DOUBLE},
+      </if>
+      <if test="remarkPay != null">
+        remark_pay = #{remarkPay,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null">
+        remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+      	id=id
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qppi.crud.bean.WorkingHours">
+    update working_hours
+    set create_by = #{createBy,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=VARCHAR},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      del_flag = #{delFlag,jdbcType=VARCHAR},
+      order_id = #{orderId,jdbcType=VARCHAR},
+      pay_time = #{payTime,jdbcType=TIMESTAMP},
+      time_out = #{timeOut,jdbcType=TIMESTAMP},
+      total = #{total,jdbcType=DOUBLE},
+      remark_pay = #{remarkPay,jdbcType=VARCHAR},
+      remarks = #{remarks,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

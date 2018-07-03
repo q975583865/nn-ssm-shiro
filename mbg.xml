@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+
+  <context id="DB2Tables" targetRuntime="MyBatis3">
+  
+    <commentGenerator>
+	  <property name="suppressAllComments" value="true" />
+	</commentGenerator>
+  
+  	<!-- 配置数据库连接信息 -->
+    <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+        connectionURL="jdbc:mysql://localhost:3306/jeeplus"
+        userId="root"
+        password="root">
+    </jdbcConnection>
+
+    <javaTypeResolver >
+      <property name="forceBigDecimals" value="false" />
+    </javaTypeResolver>
+
+	<!-- 指定javabean生成的位置 -->
+    <javaModelGenerator targetPackage="com.qppi.crud.bean" 
+    					targetProject=".\src\main\java">
+      <property name="enableSubPackages" value="true" />
+      <property name="trimStrings" value="true" />
+    </javaModelGenerator>
+
+	<!-- 指定sql映射文件生成的位置 -->
+    <sqlMapGenerator targetPackage="mapper"  
+    				 targetProject=".\src\main\resources">
+      <property name="enableSubPackages" value="true" />
+    </sqlMapGenerator>
+
+	<!-- 指定dao接口文件生成的位置 -->
+    <javaClientGenerator type="XMLMAPPER" targetPackage="com.qppi.crud.dao"  
+    									  targetProject=".\src\main\java">
+      <property name="enableSubPackages" value="true" />
+    </javaClientGenerator>
+	
+
+
+	<table tableName="sys_auth_user" domainObjectName="SysAuthUser"></table>
+	
+	<!-- mywork-->
+	<!-- <table tableName="dev_doc" domainObjectName="DevDoc"></table>
+	<table tableName="my_cw" domainObjectName="MyCw"></table> -->
+	
+	<!-- 会员 -->
+	<!-- <table tableName="member_info" domainObjectName="MemberInfo"></table> -->
+	<!-- <table tableName="member_addr_info" domainObjectName="MemberAddrInfo"></table> -->
+	
+	<!-- 供应商 -->
+	<!-- <table tableName="supplier_info" domainObjectName="SupplierInfo"></table>
+	<table tableName="pj_info" domainObjectName="PjInfo"></table> -->
+	
+	<!-- 配件数据 -->
+	<!-- <table tableName="haocar_brand" domainObjectName="HaoCarBrand"></table>
+	<table tableName="haocar_xl" domainObjectName="HaoCarXl"></table>
+	<table tableName="haocar_bodywork" domainObjectName="HaoCarBodywork"></table>
+	<table tableName="haocar_part_new" domainObjectName="HaoCarPartNew"></table>
+	<table tableName="haocar_lj_info" domainObjectName="HaoCarLjInfo"></table> -->
+	
+	<!-- 购物车 -->
+	<!-- <table tableName="buyer_info" domainObjectName="BuyerInfo"></table> -->
+	
+	<!-- 发布 -->
+	<!-- <table tableName="part_gz_info" domainObjectName="PartGzInfo"></table>
+	<table tableName="car_rental_info" domainObjectName="CarRentalInfo"></table> -->
+	
+	<!-- 报价 -->
+	<!-- <table tableName="supplier_offer_declare" domainObjectName="SupplierOfferDeclare"></table>
+	<table tableName="supplier_offer_part" domainObjectName="SupplierOfferPart"></table> -->
+	<!-- <table tableName="offer_mx" domainObjectName="OfferMx"></table> -->
+	
+	<!-- 订单 -->
+	<!-- <table tableName="order_info_gz" domainObjectName="OrderInfoGz"></table>
+	<table tableName="order_info_zc" domainObjectName="OrderInfoZc"></table>
+	<table tableName="order_info_yzjc" domainObjectName="OrderInfoYzjc"></table>
+	<table tableName="order_mx_part" domainObjectName="OrderMxPart"></table> -->
+	
+	<!-- 省市区 -->
+	<!-- <table tableName="areas" domainObjectName="Areas"></table>
+	<table tableName="provinces" domainObjectName="Provinces"></table> -->
+	<!-- <table tableName="cities" domainObjectName="Cities"></table> -->
+	
+	<!-- 数据字典 -->
+	<!-- <table tableName="sys_dict" domainObjectName="SysDict"></table> -->
+	
+  </context>
+</generatorConfiguration>
